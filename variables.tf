@@ -89,6 +89,17 @@ variable "image_ubuntu1804" {
   }
 }
 
+variable "image_ubuntu2204" {
+  description = "Default Ubuntu 22.04 LTS Image"
+  type        = map(any)
+  default = {
+    "offer"     = "0001-com-ubuntu-server-jammy"
+    "publisher" = "Canonical"
+    "sku"       = "22_04-lts-gen2"
+    "version"   = "latest"
+  }
+}
+
 variable "image_windows2019" {
   description = "Default Windows 2019 Server Image"
   type        = map(any)

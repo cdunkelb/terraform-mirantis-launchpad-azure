@@ -44,7 +44,7 @@ module "masters" {
   location            = var.azure_region
   subnet_id           = module.vnet.subnet_id
   ssh_key             = module.common.ssh_key
-  image               = var.image_ubuntu1804
+  image               = var.image_ubuntu2204
   master_type         = var.master_type
   tags                = var.tags
   fault_domain_count  = var.fault_domain_count
@@ -62,7 +62,7 @@ module "workers" {
   location            = var.azure_region
   subnet_id           = module.vnet.subnet_id
   ssh_key             = module.common.ssh_key
-  image               = var.image_ubuntu1804
+  image               = var.image_ubuntu2204
   worker_type         = var.worker_type
   tags                = var.tags
   fault_domain_count  = var.fault_domain_count
