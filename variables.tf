@@ -151,12 +151,12 @@ variable "use_instance_metadata" {
 
 variable "client_id" {
   description = "value for client_id"
-  default = ""
+  default = "${AZURE_CLIENT_ID}"
   
 }
 
 variable "client_secret" {
   description = "value for client_secret"
-  default = ""
+  default = "${AZURE_CLIENT_SECRET}"
   sensitive = true
 }
