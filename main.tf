@@ -177,7 +177,7 @@ output "azure_cloud_provider_config" {
     resourceGroup                = module.vnet.rg,
     location                     = var.azure_region,
     subnetName                   = module.vnet.subnet.name,
-    securityGroupName            = module.master.master_nsg.name,
+    securityGroupName            = module.masters.master_nsg.name,
     vnetName                     = module.vnet.name,
     cloudProviderBackoff         = var.cloud_provider_backoff,
     useManagedIdentityExtension  = var.use_managed_identity_extension,
