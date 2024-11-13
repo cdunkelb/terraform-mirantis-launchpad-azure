@@ -185,4 +185,5 @@ output "azure_cloud_provider_config" {
   })
 
   description = "Azure cloud provider configuration"
+  sensitive = true
 }
