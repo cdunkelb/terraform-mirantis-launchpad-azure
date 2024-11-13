@@ -148,3 +148,15 @@ variable "use_instance_metadata" {
   default = true
   
 }
+
+variable "client_id" {
+  description = "value for client_id"
+  default = ""
+  
+}
+
+variable "client_secret" {
+  description = "value for client_secret"
+  default = ""
+  sensitive = true
+}
