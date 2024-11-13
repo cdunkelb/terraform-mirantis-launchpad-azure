@@ -11,5 +11,5 @@ output "machines" {
 }
 
 output "nsg_name" {
-  value = azurerm_network_security_group.mke_nsg.name
+  value = azurerm_network_security_group.master_nsg.name
 }
