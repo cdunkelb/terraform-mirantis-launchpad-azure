@@ -9,3 +9,7 @@ output "public_ips" {
 output "machines" {
   value = azurerm_virtual_machine.mke_master
 }
+
+output "nsg_name" {
+  value = azurerm_network_security_group.master_nsg.name
+}

@@ -89,6 +89,17 @@ variable "image_ubuntu1804" {
   }
 }
 
+variable "image_ubuntu2204" {
+  description = "Default Ubuntu 22.04 LTS Image"
+  type        = map(any)
+  default = {
+    "offer"     = "0001-com-ubuntu-server-jammy"
+    "publisher" = "Canonical"
+    "sku"       = "22_04-lts-gen2"
+    "version"   = "latest"
+  }
+}
+
 variable "image_windows2019" {
   description = "Default Windows 2019 Server Image"
   type        = map(any)
@@ -120,4 +131,32 @@ variable "fault_domain_count" {
 variable "update_domain_count" {
   description = "Specifies the number of update domains that are used"
   default     = 2
+}
+
+variable "cloud_provider_backoff" {
+  description = "value for cloud_provider_backoff"
+  default = false
+}
+
+variable "use_managed_identity_extension" {
+  description = "value for use_managed_identity_extension"
+  default = false
+}
+
+variable "use_instance_metadata" {
+  description = "value for use_instance_metadata"
+  default = true
+  
+}
+
+variable "client_id" {
+  description = "value for client_id"
+  default = ""
+  
+}
+
+variable "client_secret" {
+  description = "value for client_secret"
+  default = ""
+  sensitive = true
 }

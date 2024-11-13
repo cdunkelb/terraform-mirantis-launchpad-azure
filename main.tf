@@ -3,6 +3,8 @@ provider "azurerm" {
   environment = var.azure_environment
 }
 
+data "azurerm_client_config" "current" {}
+
 resource "random_string" "random" {
   length      = 6
   special     = false
@@ -44,7 +46,7 @@ module "masters" {
   location            = var.azure_region
   subnet_id           = module.vnet.subnet_id
   ssh_key             = module.common.ssh_key
-  image               = var.image_ubuntu1804
+  image               = var.image_ubuntu2204
   master_type         = var.master_type
   tags                = var.tags
   fault_domain_count  = var.fault_domain_count
@@ -62,7 +64,7 @@ module "workers" {
   location            = var.azure_region
   subnet_id           = module.vnet.subnet_id
   ssh_key             = module.common.ssh_key
-  image               = var.image_ubuntu1804
+  image               = var.image_ubuntu2204
   worker_type         = var.worker_type
   tags                = var.tags
   fault_domain_count  = var.fault_domain_count
@@ -163,4 +165,25 @@ output "loadbalancers" {
     MasterLB  = module.masters.lb_dns_name
     WorkersLB = var.worker_count > 0 ? module.workers[0].lb_dns_name : ""
   }
+}
+
+output "azure_cloud_provider_config" {
+  value = jsonencode({
+    cloud                        = var.azure_environment,
+    tenantId                     = data.azurerm_client_config.current.tenant_id,
+    subscriptionId               = data.azurerm_client_config.current.subscription_id,
+    aadClientId                  = var.client_id,
+    aadClientSecret              = var.client_secret,
+    resourceGroup                = module.vnet.rg,
+    location                     = var.azure_region,
+    subnetName                   = module.vnet.subnet_name,
+    securityGroupName            = module.masters.nsg_name,
+    vnetName                     = module.vnet.vnet_name,
+    cloudProviderBackoff         = var.cloud_provider_backoff,
+    useManagedIdentityExtension  = var.use_managed_identity_extension,
+    useInstanceMetadata          = var.use_instance_metadata
+  })
+
+  description = "Azure cloud provider configuration"
+  sensitive = true
 }
