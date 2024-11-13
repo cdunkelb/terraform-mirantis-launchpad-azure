@@ -132,3 +132,19 @@ variable "update_domain_count" {
   description = "Specifies the number of update domains that are used"
   default     = 2
 }
+
+variable "cloud_provider_backoff" {
+  description = "value for cloud_provider_backoff"
+  default = false
+}
+
+variable "use_managed_identity_extension" {
+  description = "value for use_managed_identity_extension"
+  default = false
+}
+
+variable "use_instance_metadata" {
+  description = "value for use_instance_metadata"
+  default = true
+  
+}

@@ -164,3 +164,25 @@ output "loadbalancers" {
     WorkersLB = var.worker_count > 0 ? module.workers[0].lb_dns_name : ""
   }
 }
+
+output "azure_cloud_provider_config" {
+  value = jsonencode({
+    cloud                        = var.azure_environment,
+    tenantId                     = data.azurerm_client_config.current.tenant_id,
+    subscriptionId               = data.azurerm_client_config.current.subscription_id,
+    aadClientId                  = data.azurerm_client_config.current.client_id,
+    aadClientSecret              = data.azurerm_client_config.current.client_secret,
+    resourceGroup                = module.vnet.rg,
+    location                     = var.azure_region,
+    subnetName                   = module.vnet.subnet_name,
+    securityGroupName            = module.vnet.nsg_name,
+    vnetName                     = module.vnet.virtual_network_name,
+    routeTableName               = module.vnet.route_table_name,
+    primaryAvailabilitySetName   = module.masters.availability_set_name,
+    cloudProviderBackoff         = var.cloud_provider_backoff,
+    useManagedIdentityExtension  = var.use_managed_identity_extension,
+    useInstanceMetadata          = var.use_instance_metadata
+  })
+
+  description = "Azure cloud provider configuration"
+}
